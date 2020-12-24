@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AdministracionEmpleados.NETCore.Clases.EmpleadoDetalle>
+
+@{
+    ViewData["Title"] = "Pagina Principal";
+}
+
+<h1 style="text-align: center">Empleados</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-actions no-color">
+        <p>
+            Filtro: <input type="text" name="Busqueda" value="" />
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+            <a asp-action="Index" style="text-decoration: none"><strong> Todos los Registros </strong></a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                <a asp-action="CrearEditar" class="btn btn-outline-success"><i class="fas fa-plus-circle"></i> Crear Empleado</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                <a asp-action="CrearEditar" asp-route-id="@item.IdEmpleado" style="text-decoration: none"><i class="fa fa-maker fa-lg"></i><i class="fas fa-user-edit fa-lg"></i>Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEmpleado" style="text-decoration: none" class="text-danger m1-1" onclick="return confirm('Deseas eliminar el Empleado/a seleccionado/a?')"><i class="fas fa-trash-alt fa-lg"></i> Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
